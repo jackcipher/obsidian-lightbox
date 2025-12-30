@@ -1,7 +1,7 @@
 {
   "id": "lightbox",
   "name": "Lightbox",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "minAppVersion": "0.15.0",
   "description": "Click to zoom images and mermaid diagrams with lightbox effect.",
   "author": "Jack Xu",

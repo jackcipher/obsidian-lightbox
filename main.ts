@@ -1,4 +1,4 @@
-import { Plugin, MarkdownView } from 'obsidian';
+import { Plugin, MarkdownView, setIcon } from 'obsidian';
 
 interface LightboxSettings {
   minZoom: number;
@@ -108,11 +108,7 @@ export default class LightboxPlugin extends Plugin {
       const svgClone = svg.cloneNode(true) as SVGElement;
       svgClone.classList.add('lightbox-mermaid');
       
-      // 设置合适的大小
-      svgClone.style.maxWidth = '90vw';
-      svgClone.style.maxHeight = '80vh';
-      svgClone.style.width = 'auto';
-      svgClone.style.height = 'auto';
+      svgClone.classList.add('lightbox-mermaid-content');
       
       contentWrapper.appendChild(svgClone);
       this.contentEl = svgClone as unknown as HTMLElement;
@@ -143,7 +139,7 @@ export default class LightboxPlugin extends Plugin {
     // 缩小按钮
     const zoomOutBtn = document.createElement('button');
     zoomOutBtn.className = 'lightbox-btn';
-    zoomOutBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>`;
+    setIcon(zoomOutBtn, 'zoom-out');
     zoomOutBtn.title = '缩小';
     zoomOutBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -158,7 +154,7 @@ export default class LightboxPlugin extends Plugin {
     // 放大按钮
     const zoomInBtn = document.createElement('button');
     zoomInBtn.className = 'lightbox-btn';
-    zoomInBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>`;
+    setIcon(zoomInBtn, 'zoom-in');
     zoomInBtn.title = '放大';
     zoomInBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -168,7 +164,7 @@ export default class LightboxPlugin extends Plugin {
     // 重置按钮
     const resetBtn = document.createElement('button');
     resetBtn.className = 'lightbox-btn';
-    resetBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>`;
+    setIcon(resetBtn, 'rotate-ccw');
     resetBtn.title = '重置';
     resetBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -178,8 +174,8 @@ export default class LightboxPlugin extends Plugin {
     // 关闭按钮
     const closeBtn = document.createElement('button');
     closeBtn.className = 'lightbox-btn lightbox-close-btn';
-    closeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
-    closeBtn.title = '关闭 (ESC)';
+    setIcon(closeBtn, 'x');
+    closeBtn.title = '关闭 (Esc)';
     closeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       this.closeLightbox();
@@ -225,7 +221,7 @@ export default class LightboxPlugin extends Plugin {
       this.isDragging = true;
       this.startX = e.clientX - this.translateX;
       this.startY = e.clientY - this.translateY;
-      wrapper.style.cursor = 'grabbing';
+      wrapper.setCssStyles({ cursor: 'grabbing' });
     });
 
     document.addEventListener('mousemove', (e) => {
@@ -238,7 +234,7 @@ export default class LightboxPlugin extends Plugin {
     document.addEventListener('mouseup', () => {
       this.isDragging = false;
       if (wrapper) {
-        wrapper.style.cursor = 'grab';
+        wrapper.setCssStyles({ cursor: 'grab' });
       }
     });
   }
@@ -288,7 +284,9 @@ export default class LightboxPlugin extends Plugin {
 
   private updateTransform() {
     if (this.contentEl) {
-      this.contentEl.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.currentZoom})`;
+      this.contentEl.setCssStyles({
+        transform: `translate(${this.translateX}px, ${this.translateY}px) scale(${this.currentZoom})`
+      });
     }
   }
 
