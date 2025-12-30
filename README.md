@@ -1,74 +1,83 @@
 # Obsidian Lightbox
 
-一个为 Obsidian 打造的 Lightbox 插件，支持点击放大图片和 Mermaid 图表。
+[中文文档](./README-cn.md)
 
-## 功能特性
+A Lightbox plugin for Obsidian that allows you to click and zoom images and Mermaid diagrams.
 
-- 🖼️ **图片放大** - 点击阅读视图中的图片，弹出 Lightbox 查看大图
-- 📊 **Mermaid 支持** - 点击 Mermaid 图表也能放大查看
-- 🔍 **缩放控制** - 支持放大、缩小、重置缩放比例
-- 🖱️ **滚轮缩放** - 使用鼠标滚轮快速调整缩放
-- ✋ **拖拽移动** - 放大后可拖拽查看图片不同区域
-- ⌨️ **快捷键** - 按 ESC 快速关闭
-- 🎨 **优雅动画** - 平滑的打开/关闭动画效果
+## Features
 
-## 安装
+- 🖼️ **Image Zoom** - Click images in reading view to open a Lightbox with enlarged view
+- 📊 **Mermaid Support** - Click Mermaid diagrams to zoom them as well
+- 🔍 **Zoom Controls** - Support for zoom in, zoom out, and reset
+- 🖱️ **Scroll Zoom** - Use mouse wheel to quickly adjust zoom level
+- ✋ **Drag to Pan** - Drag to view different areas when zoomed in
+- ⌨️ **Keyboard Shortcut** - Press ESC to quickly close
+- 🎨 **Smooth Animations** - Elegant open/close transition effects
 
-### 手动安装
+## Installation
 
-1. 下载最新的 release
-2. 解压到 Obsidian 插件目录: `<vault>/.obsidian/plugins/obsidian-lightbox/`
-3. 重启 Obsidian
-4. 在设置中启用插件
+### Manual Installation
 
-### 从源码构建
+1. Download the latest release
+2. Extract to Obsidian plugins directory: `<vault>/.obsidian/plugins/obsidian-lightbox/`
+3. Restart Obsidian
+4. Enable the plugin in settings
+
+### Build from Source
 
 ```bash
-# 克隆仓库
+# Clone the repository
 cd <vault>/.obsidian/plugins/
 git clone https://github.com/your-repo/obsidian-lightbox.git
 cd obsidian-lightbox
 
-# 安装依赖
+# Install dependencies
 npm install
 
-# 构建
+# Build
 npm run build
 ```
 
-## 使用方法
+### Required Files
 
-1. 在 Obsidian 中打开任意包含图片或 Mermaid 图表的笔记
-2. 切换到**阅读视图** (Reading View)
-3. 点击任意图片或 Mermaid 图表
-4. Lightbox 弹窗会显示放大的内容
+To install the plugin, you only need these 3 files in the plugin folder:
 
-### 控制方式
+- `manifest.json` - Plugin metadata (required)
+- `main.js` - Compiled plugin code (required)
+- `styles.css` - Stylesheet (required)
 
-| 操作 | 说明 |
-|------|------|
-| 点击图片/Mermaid | 打开 Lightbox |
-| 滚轮上滚 | 放大 |
-| 滚轮下滚 | 缩小 |
-| 鼠标拖拽 | 移动图片位置 |
-| 点击背景 | 关闭 Lightbox |
-| ESC 键 | 关闭 Lightbox |
-| ➕ 按钮 | 放大 25% |
-| ➖ 按钮 | 缩小 25% |
-| 🔄 按钮 | 重置缩放和位置 |
-| ✖️ 按钮 | 关闭 |
+## Usage
 
-## 开发
+1. Open any note containing images or Mermaid diagrams in Obsidian
+2. Switch to **Reading View**
+3. Click any image or Mermaid diagram
+4. The Lightbox popup will display the enlarged content
+
+### Controls
+
+| Action | Description |
+|--------|-------------|
+| Click image/Mermaid | Open Lightbox |
+| Scroll up | Zoom in |
+| Scroll down | Zoom out |
+| Mouse drag | Pan the image |
+| Click background | Close Lightbox |
+| ESC key | Close Lightbox |
+| ➕ button | Zoom in 25% |
+| ➖ button | Zoom out 25% |
+| 🔄 button | Reset zoom and position |
+| ✖️ button | Close |
+
+## Development
 
 ```bash
-# 开发模式（自动重新构建）
+# Development mode (auto-rebuild on changes)
 npm run dev
 
-# 生产构建
+# Production build
 npm run build
 ```
 
 ## License
 
 MIT
-
