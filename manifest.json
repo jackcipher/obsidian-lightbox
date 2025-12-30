@@ -3,7 +3,7 @@
   "name": "Lightbox",
   "version": "1.0.0",
   "minAppVersion": "0.15.0",
-  "description": "Click to zoom images and mermaid diagrams with lightbox effect",
+  "description": "Click to zoom images and mermaid diagrams with lightbox effect.",
   "author": "Jack Xu",
   "authorUrl": "https://github.com/jackcipher",
   "isDesktopOnly": false
