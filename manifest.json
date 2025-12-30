@@ -1,0 +1,11 @@
+{
+  "id": "obsidian-lightbox",
+  "name": "Lightbox",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Click to zoom images and mermaid diagrams with lightbox effect",
+  "author": "Your Name",
+  "authorUrl": "",
+  "isDesktopOnly": false
+}
+
