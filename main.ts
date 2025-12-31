@@ -29,7 +29,7 @@ export default class LightboxPlugin extends Plugin {
     // 注册点击事件监听器
     this.registerDomEvent(document, 'click', (evt: MouseEvent) => {
       const target = evt.target as HTMLElement;
-      
+
       // 检查是否点击了图片
       if (target.tagName === 'IMG' && this.isInReadingView(target)) {
         evt.preventDefault();
@@ -72,48 +72,48 @@ export default class LightboxPlugin extends Plugin {
     // 检查元素是否在阅读视图中
     const markdownView = this.app.workspace.getActiveViewOfType(MarkdownView);
     if (!markdownView) return false;
-    
+
     const previewEl = markdownView.containerEl.querySelector('.markdown-reading-view');
     if (!previewEl) return false;
-    
+
     return previewEl.contains(el);
   }
 
   private openLightbox(img: HTMLImageElement) {
     this.createLightboxContainer();
-    
+
     const contentWrapper = this.lightboxEl!.querySelector('.lightbox-content-wrapper') as HTMLElement;
-    
+
     // 创建图片元素
     const imgClone = document.createElement('img');
     imgClone.src = img.src;
     imgClone.alt = img.alt || '';
     imgClone.className = 'lightbox-image';
-    
+
     contentWrapper.appendChild(imgClone);
     this.contentEl = imgClone;
-    
+
     this.resetZoom();
     this.setupDragHandlers(contentWrapper);
   }
 
   private openMermaidLightbox(mermaidEl: HTMLElement) {
     this.createLightboxContainer();
-    
+
     const contentWrapper = this.lightboxEl!.querySelector('.lightbox-content-wrapper') as HTMLElement;
-    
+
     // 克隆 mermaid SVG
     const svg = mermaidEl.querySelector('svg');
     if (svg) {
       const svgClone = svg.cloneNode(true) as SVGElement;
       svgClone.classList.add('lightbox-mermaid');
-      
+
       svgClone.classList.add('lightbox-mermaid-content');
-      
+
       contentWrapper.appendChild(svgClone);
       this.contentEl = svgClone as unknown as HTMLElement;
     }
-    
+
     this.resetZoom();
     this.setupDragHandlers(contentWrapper);
   }
@@ -127,76 +127,76 @@ export default class LightboxPlugin extends Plugin {
     // 创建 lightbox 容器
     this.lightboxEl = document.createElement('div');
     this.lightboxEl.className = 'lightbox-overlay';
-    
+
     // 创建内容包装器
     const contentWrapper = document.createElement('div');
     contentWrapper.className = 'lightbox-content-wrapper';
-    
+
     // 创建控制栏
     const controls = document.createElement('div');
     controls.className = 'lightbox-controls';
-    
+
     // 缩小按钮
     const zoomOutBtn = document.createElement('button');
     zoomOutBtn.className = 'lightbox-btn';
     setIcon(zoomOutBtn, 'zoom-out');
-    zoomOutBtn.title = '缩小';
+    zoomOutBtn.title = 'Zoom out';
     zoomOutBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       this.zoomOut();
     });
-    
+
     // 缩放显示
     const zoomDisplay = document.createElement('span');
     zoomDisplay.className = 'lightbox-zoom-display';
     zoomDisplay.textContent = '100%';
-    
+
     // 放大按钮
     const zoomInBtn = document.createElement('button');
     zoomInBtn.className = 'lightbox-btn';
     setIcon(zoomInBtn, 'zoom-in');
-    zoomInBtn.title = '放大';
+    zoomInBtn.title = 'Zoom In';
     zoomInBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       this.zoomIn();
     });
-    
+
     // 重置按钮
     const resetBtn = document.createElement('button');
     resetBtn.className = 'lightbox-btn';
     setIcon(resetBtn, 'rotate-ccw');
-    resetBtn.title = '重置';
+    resetBtn.title = 'Reset';
     resetBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       this.resetZoom();
     });
-    
+
     // 关闭按钮
     const closeBtn = document.createElement('button');
     closeBtn.className = 'lightbox-btn lightbox-close-btn';
     setIcon(closeBtn, 'x');
-    closeBtn.title = '关闭 (Esc)';
+    closeBtn.title = 'Close';
     closeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       this.closeLightbox();
     });
-    
+
     controls.appendChild(zoomOutBtn);
     controls.appendChild(zoomDisplay);
     controls.appendChild(zoomInBtn);
     controls.appendChild(resetBtn);
     controls.appendChild(closeBtn);
-    
+
     this.lightboxEl.appendChild(contentWrapper);
     this.lightboxEl.appendChild(controls);
-    
+
     // 点击背景关闭
     this.lightboxEl.addEventListener('click', (e) => {
       if (e.target === this.lightboxEl) {
         this.closeLightbox();
       }
     });
-    
+
     // 滚轮缩放
     this.lightboxEl.addEventListener('wheel', (e) => {
       e.preventDefault();
@@ -206,9 +206,9 @@ export default class LightboxPlugin extends Plugin {
         this.zoomOut();
       }
     }, { passive: false });
-    
+
     document.body.appendChild(this.lightboxEl);
-    
+
     // 添加打开动画
     requestAnimationFrame(() => {
       this.lightboxEl?.classList.add('lightbox-active');
