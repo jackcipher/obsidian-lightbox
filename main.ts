@@ -155,7 +155,7 @@ export default class LightboxPlugin extends Plugin {
     const zoomInBtn = document.createElement('button');
     zoomInBtn.className = 'lightbox-btn';
     setIcon(zoomInBtn, 'zoom-in');
-    zoomInBtn.title = 'Zoom In';
+    zoomInBtn.title = 'Zoom in';
     zoomInBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       this.zoomIn();
